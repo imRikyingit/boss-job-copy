@@ -2,11 +2,6 @@
   const BUTTON_ID = "boss-copy-detail-btn";
   const TARGET_SELECTOR = ".job-detail-body";
   const DESCRIPTION_SELECTOR = "p.desc";
-  const HEADER_SELECTORS = [
-    ".job-detail-header",
-    ".job-detail-header-wrap",
-    ".job-detail-top",
-  ];
   const PROBE_DELAYS = [300, 600, 1000, 1600, 2400, 3200, 4500];
   const CHECK_INTERVAL_MS = 5000;
   let probeTimer = 0;
@@ -41,37 +36,6 @@
     let text = descElement.innerText || "";
     text = normalizeText(text);
     return text;
-  }
-
-  function getHeaderText() {
-    for (const selector of HEADER_SELECTORS) {
-      const header = document.querySelector(selector);
-      if (!header) {
-        continue;
-      }
-
-      const text = normalizeText(header.innerText || "");
-      if (text) {
-        return text;
-      }
-    }
-
-    return "";
-  }
-
-  function getJobDetailText() {
-    const description = getDescriptionText();
-    const header = getHeaderText();
-    const sections = [];
-
-    if (header) {
-      sections.push("职位概览", header);
-    }
-    if (description) {
-      sections.push("职位描述", description);
-    }
-
-    return sections.join("\n\n").trim();
   }
 
   async function copyText(text) {
@@ -113,11 +77,11 @@
       button.id = BUTTON_ID;
       button.type = "button";
       button.className = "boss-copy-btn";
-      button.title = "复制职位信息，可粘贴到 AI 工具分析";
-      button.setAttribute("aria-label", "复制职位信息");
+      button.title = "复制招聘文本，可粘贴到 AI 工具分析";
+      button.setAttribute("aria-label", "复制招聘文本");
       button.addEventListener("click", async () => {
         try {
-          const text = getJobDetailText();
+          const text = getDescriptionText();
           await copyText(text);
           setButtonState(button, "success", "已复制");
         } catch (err) {
@@ -126,7 +90,7 @@
 
         window.setTimeout(() => {
           const exists = !!getDescriptionElement();
-          setButtonState(button, exists ? "ready" : "hidden", exists ? "复制职位信息" : "等待职位详情...");
+          setButtonState(button, exists ? "ready" : "hidden", exists ? "复制招聘文本" : "等待招聘详情...");
           if (!exists) {
             button.classList.remove("is-visible");
             isButtonVisible = false;
@@ -149,11 +113,11 @@
     if (hasTarget) {
       button.classList.add("is-visible");
       if (button.dataset.state !== "success") {
-        setButtonState(button, "ready", "复制职位信息");
+        setButtonState(button, "ready", "复制招聘文本");
       }
     } else {
       button.classList.remove("is-visible");
-      setButtonState(button, "hidden", "等待职位详情...");
+      setButtonState(button, "hidden", "等待招聘详情...");
     }
   }
 
