@@ -1,0 +1,45 @@
+.boss-copy-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+  z-index: 2147483647;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 11px 18px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff9f1a, #f46b08);
+  box-shadow: 0 10px 24px rgba(244, 107, 8, 0.28);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.boss-copy-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.boss-copy-btn[data-state="success"] {
+  background: linear-gradient(135deg, #2f80ed, #1f6dd6);
+  box-shadow: 0 10px 24px rgba(31, 109, 214, 0.28);
+}
+
+.boss-copy-btn[data-state="error"] {
+  background: linear-gradient(135deg, #f25f5c, #e0433f);
+  box-shadow: 0 10px 24px rgba(224, 67, 63, 0.28);
+}
+
+.boss-copy-btn:hover {
+  filter: brightness(1.05);
+}
+
+.boss-copy-btn:active {
+  transform: translateY(1px);
+}

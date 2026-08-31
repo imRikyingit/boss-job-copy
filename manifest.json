@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "BOSS 职位复制助手",
+  "version": "1.1.0",
+  "description": "在 BOSS 直聘职位详情页一键复制职位概览和职位描述，方便粘贴到 AI 工具分析。",
+  "homepage_url": "https://github.com/imRikyingit/boss-job-copy",
+  "permissions": ["clipboardWrite"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.zhipin.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
